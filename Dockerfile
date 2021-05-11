@@ -53,7 +53,7 @@ RUN php go-pear.phar
 
 RUN pecl install mcrypt-1.0.3
 
-RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.4/mods-available/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/7.4/mods-available/mcrypt.ini"
 
 RUN phpenmod mcrypt
 RUN phpenmod gd
