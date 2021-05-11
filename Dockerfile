@@ -5,6 +5,11 @@ LABEL maintainer Brady Wetherington <uberbrady@gmail.com>
 # - https://github.com/snipe/snipe-it/pull/9201
 # - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get
 
+RUN apt-get update -qqy \
+&& apt-get install -qqy \
+software-properties-common \
+&& add-apt-repository ppa:ondrej/php
+
 RUN export DEBIAN_FRONTEND=noninteractive; \
     export DEBCONF_NONINTERACTIVE_SEEN=true; \
     echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
@@ -14,18 +19,18 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
 apt-utils \
 apache2 \
 apache2-bin \
-libapache2-mod-php7.2 \
-php7.2-curl \
-php7.2-ldap \
-php7.2-mysql \
-php7.2-gd \
-php7.2-xml \
-php7.2-mbstring \
-php7.2-zip \
-php7.2-bcmath \
+libapache2-mod-php7.4 \
+php7.4-curl \
+php7.4-ldap \
+php7.4-mysql \
+php7.4-gd \
+php7.4-xml \
+php7.4-mbstring \
+php7.4-zip \
+php7.4-bcmath \
 patch \
 curl \
-wget  \
+wget \
 vim \
 git \
 cron \
@@ -38,8 +43,7 @@ autoconf \
 libc-dev \
 pkg-config \
 libmcrypt-dev \
-php7.2-dev \
-ca-certificates \
+php7.4-dev \
 unzip \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -47,16 +51,16 @@ unzip \
 RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
 RUN php go-pear.phar
 
-RUN pecl install mcrypt-1.0.2
+RUN pecl install mcrypt-1.0.3
 
-RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/mods-available/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.4/mods-available/mcrypt.ini"
 
 RUN phpenmod mcrypt
 RUN phpenmod gd
 RUN phpenmod bcmath
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.2/apache2/php.ini
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.2/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.4/cli/php.ini
 
 RUN useradd -m --uid 1000 --gid 50 docker
 
