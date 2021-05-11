@@ -55,6 +55,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'state',
         'username',
         'zip',
+        'profile_pic',
+        'google_id',
+        'permissions',
+        'avatar',
     ];
 
     protected $casts = [

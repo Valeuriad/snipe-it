@@ -353,6 +353,7 @@ return [
         App\Providers\MacroServiceProvider::class,
         App\Providers\LdapServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
 
     ],
@@ -407,6 +408,7 @@ return [
         'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,
         'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
 
     ],

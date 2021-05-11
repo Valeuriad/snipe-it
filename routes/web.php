@@ -474,4 +474,7 @@ Route::group(['middleware' => 'web'], function () {
 
 Auth::routes();
 
+Route::get('login/google', 'Auth\LoginController@google');
+Route::get('login/google/callback', 'Auth\LoginController@googleCallback');
+
 Route::get('/health', [ 'as' => 'health', 'uses' => 'HealthController@get']);
