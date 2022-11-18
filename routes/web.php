@@ -494,12 +494,10 @@ Route::group(['middleware' => 'web'], function () {
 
 //Auth::routes();
 
-<<<<<<< HEAD
 Route::get('login/google', 'Auth\LoginController@google');
 Route::get('login/google/callback', 'Auth\LoginController@googleCallback');
 
 Route::get('/health', [ 'as' => 'health', 'uses' => 'HealthController@get']);
-=======
 Route::get(
     '/health', 
     [HealthController::class, 'get']
@@ -509,4 +507,3 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
->>>>>>> master
