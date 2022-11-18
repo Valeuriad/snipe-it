@@ -49,6 +49,12 @@ return array(
 
     ),
 
+    'fieldset_default_value' => array(
+
+        'error' => 'Ошибка проверки значений полей по умолчанию.',
+
+    ),
+
 
 
 

@@ -65,7 +65,7 @@
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@red, 10%);
-    border-color: darken(@red, 20%);
+    border-color: #FFF;
     color: #fff;
   }
 
@@ -88,6 +88,14 @@
 }
 
 
+/**
+The dropdown is white, so use a darker color
+ */
+li.dropdown-item-marker {
+  color: var(--button-primary);
+}
+
+
 a {
   &:hover {
     color: #fff;
@@ -107,8 +115,8 @@ a {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #444;
-  --back-sub-alt: #dfd9d8;
+  --back-sub: #3d4144;
+  --back-sub-alt: rgba(0, 0, 0, 0.36);
   --button-default: darken(@red, 15%);
   --button-primary: darken(@red, 25%);
   --button-hover: darken(@red, 30%);
@@ -123,6 +131,10 @@ a {
   --light-link: #fff; /* Use same as Header picker */
 }
 
+#ldapad_test_results.well.well-sm{
+  color: var(--back-main);
+}
+
 .main-header .navbar, .main-header .logo {
   background-color: var(--header);
   background: -webkit-linear-gradient(top,  var(--header) 0%,var(--header) 100%);
@@ -132,6 +144,9 @@ a {
 
 .bootstrap-table .fixed-table-container .table thead th .sortable {
   color: var(--nav-link);
+}
+.bootstrap-table .fixed-table-toolbar .columns label {
+  color:#000;
 }
 
 .thead, .navbar-nav>li>a:link {
@@ -204,7 +219,7 @@ body {
   color: var(--link);
 }
 .btn-primary, .btn-primary.hover, .btn-primary:active, .text-red {
-  color: var(--text-main)!important;
+  color: var(--button-primary);
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
@@ -232,10 +247,6 @@ body {
 }
 #details>div>div>div>table {
   background-color: transparent;
-}
-.dropdown-menu, .dropdown-menu>li>a {
-  background-color: var(--back-sub);
-  color: var(--text-main) !important;
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
@@ -393,3 +404,15 @@ a {
   display: table-cell;
 }
 
+.row-new-striped > .row:nth-of-type(odd){
+  background-color: var(--back-sub);
+  color: var(--text-main);
+}
+.row-new-striped > .row:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--text-main);
+}
+
+.search-highlight, .search-highlight:hover {
+  background-color: #e9d15b;
+}

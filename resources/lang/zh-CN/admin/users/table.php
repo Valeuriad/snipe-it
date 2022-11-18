@@ -10,7 +10,7 @@ return array(
     'email'      			=> '邮箱',
     'employee_num'      	=> '员工号',
     'first_name' 			=> '名',
-    'groupnotes'			=> '请选择一个组给用户，注意，用户将拥有该组的所有权限。',
+    'groupnotes'			=> '选择要分配给用户的组。请注意，用户将拥有分配给他们的组的权限。使用ctrl+单击(MacOS为cmd+单击) 取消选择组。',
     'id'         			=> '编号',
     'inherit'  				=> '继承',
     'job' 					=> '职位名称',

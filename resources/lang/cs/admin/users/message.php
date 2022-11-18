@@ -12,7 +12,9 @@ return array(
     'insufficient_permissions'  => 'Nedostatečná oprávnění.',
     'user_deleted_warning'      => 'Tento uživatel byl smazán. Budete muset uživatele obnovit, aby jste ho mohli upravil nebo přidělil nové majetky.',
     'ldap_not_configured'        => 'Integrace LDAP nebyla pro tuto instalaci nakonfigurována.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'Vybraným uživatelům, kteří jsou aktivováni a mají platné e-mailové adresy, byl zaslán odkaz pro obnovení hesla.',
+    'password_reset_sent'       => 'Odkaz pro obnovení hesla byl odeslán na :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

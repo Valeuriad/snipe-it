@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Passord må bestå av minst 6 tegn og stemme med bekreftelse.",
-
     "user"     => "Brukernavn eller epostadresse er ugyldig",
-
-    "token"    => "Denne passordresetten er ugyldig.",
-
-    "sent" => "En passordpåminnelse er sendt hvis en gyldig e-postadresse ble funnet.",
+    "token"    => 'Token for tilbakestilling av passord er ugyldig eller utløpt, eller så stemmer den ikke overens med det angitte brukernavnet.',
+    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
 
 );

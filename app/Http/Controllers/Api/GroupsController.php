@@ -20,12 +20,16 @@ class GroupsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Group::class);
-        $allowed_columns = ['id','name','created_at', 'users_count'];
+        $allowed_columns = ['id', 'name', 'created_at', 'users_count'];
 
-        $groups = Group::select('id','name','permissions','created_at','updated_at')->withCount('users as users_count');
+        $groups = Group::select('id', 'name', 'permissions', 'created_at', 'updated_at')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $groups = $groups->TextSearch($request->input('search'));
+        }
+
+        if ($request->filled('name')) {
+            $groups->where('name', '=', $request->input('name'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -41,9 +45,9 @@ class GroupsController extends Controller
 
         $total = $groups->count();
         $groups = $groups->skip($offset)->take($limit)->get();
+
         return (new GroupsTransformer)->transformGroups($groups, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -62,8 +66,8 @@ class GroupsController extends Controller
         if ($group->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $group, trans('admin/groups/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $group->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $group->getErrors()));
     }
 
     /**
@@ -78,9 +82,9 @@ class GroupsController extends Controller
     {
         $this->authorize('view', Group::class);
         $group = Group::findOrFail($id);
+
         return (new GroupsTransformer)->transformGroup($group);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -118,9 +122,7 @@ class GroupsController extends Controller
         $group = Group::findOrFail($id);
         $this->authorize('delete', $group);
         $group->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/groups/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/groups/message.delete.success')));
     }
-
-
 }

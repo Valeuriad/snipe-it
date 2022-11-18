@@ -2,13 +2,13 @@
 
 return array(
 
-    'does_not_exist' => 'Luba pole olemas.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Kasutajat ei eksisteeri.',
     'asset_does_not_exist' 	=> 'Vara, mida proovite selle litsentsiga siduda, ei ole olemas.',
     'owner_doesnt_match_asset' => 'Vara, mida proovite selle litsentsiga siduda, kuulub somene-le, välja arvatud rippmenüüs määratud isik.',
     'assoc_users'	 => 'See litsents on kasutaja jaoks praegu välja jäetud ja seda ei saa kustutada. Kontrollige kõigepealt litsentsi ja seejärel proovige uuesti kustutada.',
     'select_asset_or_person' => 'Peate valima vara või kasutaja, kuid mitte mõlemad.',
-    'not_found' => 'License not found',
+    'not_found' => 'Litsentsi ei leitud',
 
 
     'create' => array(

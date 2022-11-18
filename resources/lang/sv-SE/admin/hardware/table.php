@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modell',
-    'book_value'  	=> 'Värde',
+    'book_value'  	=> 'Nuvarande värde',
     'change' 		=> 'In ut',
     'checkout_date' => 'Checkout Date',
     'checkoutto' 	=> 'Checkat ut',
+    'current_value' => 'Nuvarande värde',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Hämta CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serie',
     'status'   		=> 'Status',
     'title'      	=> 'Tillgång',
-    'image'		=> 'Enhetsbild',
+    'image'		    => 'Enhetsbild',
     'days_without_acceptance' => 'Dagar utan godkännande',
-    'monthly_depreciation' => 'Månatlig avskrivning'
-
-);
+    'monthly_depreciation' => 'Månatlig avskrivning',
+    'assigned_to'    => 'Tilldelad till',
+    'requesting_user' => 'Begär användare',
+    'requested_date' => 'Begärt datum',
+    'changed'       => 'Ändrad',
+    'icon' => 'Ikon',
+];

@@ -8,7 +8,6 @@
  | be modified directly.
 */
 
-
 return [
 
     /*
@@ -33,9 +32,9 @@ return [
     ],
 
     'ses' => [
-        'key'    => env('SES_KEY'),
-        'secret' => env('SES_SECRET'),
-        'region' => 'us-east-1',
+        'key' => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
     'stripe' => [
@@ -49,13 +48,12 @@ return [
         'app_key'  => env('STUNNING_APP_KEY'),
         'stripe_id'    => env('STUNNING_STRIPE_ID'),
     ],
-    
+
     'google' => [
         'maps_api_key' => env('GOOGLE_MAPS_API'),
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT')
     ],
-
 
 ];

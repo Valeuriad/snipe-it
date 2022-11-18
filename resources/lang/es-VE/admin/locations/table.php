@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Acerca de las Ubicaciones',
     'about_locations'           => 'Las ubicaciones son usadas para seguir la información de la ubicación de usuarios, activos, y otros objetos',
     'assets_rtd'                => 'Activos', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'País',
     'create'                    => 'Crear Ubicación',
     'update'                    => 'Actualizar Ubicación',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Imprimir los asignados',
+    'print_all_assigned'        => 'Imprimir todos los asignados',
     'name'                      => 'Nombre de Ubicación',
     'address'                   => 'Dirección',
     'zip'                       => 'Código Postal',
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'Padre',
     'currency'                  => 'Divisa de la Ubicación',
     'ldap_ou'                   => 'Búsqueda LDAP OU',
-    );
+    'user_name'                 => 'Nombre de usuario',
+    'department'                => 'Departamento',
+    'location'                  => 'Ubicación',
+    'asset_tag'                 => 'Etiqueta de activo',
+    'asset_name'                => 'Nombre',
+    'asset_category'            => 'Categoría',
+    'asset_manufacturer'        => 'Fabricante',
+    'asset_model'               => 'Modelo',
+    'asset_serial'              => 'Número de serie',
+    'asset_location'            => 'Ubicación',
+    'asset_checked_out'         => 'Asignado',
+    'asset_expected_checkin'    => 'Fecha Esperada de Devolución',
+    'date'                      => 'Fecha:',
+    'signed_by_asset_auditor'   => 'Firmado por (Juego de Acciones):',
+    'signed_by_finance_auditor' => 'Firmado por (Juego de Acciones):',
+    'signed_by_location_manager' => 'Firmado por (Administrador de ubicación):',
+    'signed_by'                 => 'Firmado por:',
+];

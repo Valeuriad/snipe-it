@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Der Nutzer kann sich einloggen',
     'activated_disabled_help_text' => 'Sie können den Aktiverungsstatus für Ihren eigenen Account nicht ändern.',
     'assets_user'       => 'Assets zugewiesen an :name',
@@ -13,16 +12,33 @@ return array(
     'edit'              => 'Benutzer bearbeiten',
     'filetype_info'     => 'Erlaubte Dateitypen sind png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, und rar.',
     'history_user'      => 'Historie von :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Klicken Sie hier, um sie wiederherzustellen.',
     'last_login'        => 'Letzte Anmeldung',
     'ldap_config_text'  => 'Die LDAP Konfigurations Einstellungen finden Sie hier Admin -> Einstellungen. Der (optional) wählbare Standort wird für alle importierten Benutzer gesetzt.',
     'print_assigned'    => 'Alles zugewiesene drucken',
+    'email_assigned'    => 'Alles zugewiesene per Mail zusenden',
+    'user_notified'     => 'Der Benutzer hat eine Liste seiner aktuell zugewiesenen Artikel per E-Mail erhalten.',
     'software_user'     => 'Software herausgegeben an :name',
     'send_email_help'   => 'Sie müssen eine E-Mail-Adresse angeben, um dem Benutzer Zugangsdaten zu zusenden. Das Versenden von Zugangsdaten ist nur bei der Erstellung eines Benutzers möglich. Passwörter werden in einem Einweg-Hash gespeichert und können danach nicht mehr ausgelesen werden.',
     'view_user'         => 'Benutzer :name ansehen',
     'usercsv'           => 'CSV Datei',
     'two_factor_admin_optin_help' => 'Ihre aktuellen Administrator-Einstellungen erlauben die selektive Durchführung der zwei-Faktor-Authentifizierung.  ',
-    'two_factor_enrolled' => '2FA Gerät eingeschrieben ',
+    'two_factor_enrolled' => '2FA-Gerät registriert ',
     'two_factor_active'   => '2FA aktiv ',
-    );
+    'user_deactivated'  => 'Benutzer kann sich nicht anmelden',
+    'user_activated'  => 'Benutzer kann sich anmelden',
+    'activation_status_warning' => 'Aktivierungsstatus nicht ändern',
+    'group_memberships_helpblock' => 'Nur Superadministratoren können Gruppenmitgliedschaften bearbeiten.',
+    'superadmin_permission_warning' => 'Nur Superadmins dürfen einem Benutzer Superadmin Zugriff gewähren.',
+    'admin_permission_warning' => 'Nur Benutzer mit Administratorrechten oder höher dürfen einem Benutzer Administratorzugriff gewähren.',
+    'remove_group_memberships' => 'Gruppenmitgliedschaften entfernen',
+    'warning_deletion' => 'WARNUNG:',
+    'warning_deletion_information' => 'Sie sind dabei, ALLE Gegenstände der/des :count unten angezeigten Benutzer/-s einzuchecken. Super-Admin-Namen werden rot hervorgehoben.',
+    'update_user_assets_status' => 'Alle Assets für diese Benutzer auf diesen Status aktualisieren',
+    'checkin_user_properties' => 'Alle diesen Benutzern zugeordneten Objekte zurücknehmen',
+    'remote_label'   => 'Dies ist ein externer Benutzer',
+    'remote'   => 'Extern',
+    'remote_help' => 'Dies kann nützlich sein, wenn Sie nach externen Benutzern filtern müssen, die niemals oder nur selten an Ihre physischen Standorte kommen.',
+    'not_remote_label' => 'Dies ist kein externer Benutzer',
+];

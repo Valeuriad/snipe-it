@@ -8,7 +8,9 @@
         'repair'             => 'Trwsio',
         'maintenance'        => 'Cynnal a Chadw',
         'upgrade'            => 'Uwchraddio',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Graddnodi',
+        'software_support'   => 'Cefnogaeth meddalwedd',
+        'hardware_support'   => 'Cefnogaeth caledwedd',
+        'configuration_change'   => 'Configuration Change',
+        'pat_test'           => 'PAT Test',
     ];

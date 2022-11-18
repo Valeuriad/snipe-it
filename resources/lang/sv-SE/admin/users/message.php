@@ -13,6 +13,8 @@ return array(
     'user_deleted_warning'      => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera dem eller tilldela dem nya tillgångar.',
     'ldap_not_configured'        => 'LDAP-integrationen har inte konfigurerats för den här installationen.',
     'password_resets_sent'      => 'De valda användare som är aktiverade och har en giltig e-postadress har skickats en länk för att återställa lösenordet.',
+    'password_reset_sent'       => 'En återställningslänk för lösenord har skickats till :email!',
+    'user_has_no_email'         => 'Den här användaren har ingen e-postadress i sin profil.',
 
 
     'success' => array(

@@ -6,7 +6,7 @@ return array(
     'assoc_users'	 => 'Dieses Zubehör ist derzeit an :count Benutzern zur Verwendung ausgegeben worden. Bitte buchen Sie das Zubehör wieder ein und versuchen es dann erneut. ',
 
     'create' => array(
-        'error'   => 'Zubehör wurde nicht erstellt, bitte versuchen Sie es erneut.',
+        'error'   => 'Zubehör wurde nicht erzeugt, bitte versuchen Sie es erneut.',
         'success' => 'Zubehör erfolgreich angelegt.'
     ),
 

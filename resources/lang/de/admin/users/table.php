@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Mitarbeiternr.',
     'first_name' 			=> 'Vorname',
-    'groupnotes'			=> 'Wähle eine Gruppe um sie dem Benutzer zuzuweisen, denke daran, dass ein Benutzer die Berechtigungen der zugewiesenen Gruppe übernimmt.',
+    'groupnotes'			=> 'Wählen Sie eine Gruppe aus, die dem Benutzer zugewiesen werden soll. Denken Sie daran, dass ein Benutzer die Berechtigungen der zugewiesenen Gruppe erhält. Benutzen Sie Strg+Klick (oder cmd+Klick bei MacOS), um Gruppen aus der Auswahl zu entfernen.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Vererben',
     'job' 					=> 'Berufsbezeichnung',

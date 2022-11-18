@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Nro. Empleado',
     'first_name' 			=> 'Nombres',
-    'groupnotes'			=> 'Agrega el usuario a un grupo, recuerda que los usuarios heredan permisos del grupo al que son agregados.',
+    'groupnotes'			=> 'Seleccione un grupo para asignar al usuario, recuerde que un usuario asume los permisos del grupo al que se le asigna. Use ctrl+click (o cmd+click en MacOS) para anular la selección de grupos.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Heredar',
     'job' 					=> 'Cargo',

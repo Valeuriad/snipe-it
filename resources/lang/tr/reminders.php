@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Şifre en az 6 karakter olmalı ve birbiriyle eşleşmeli.",
-
     "user"     => "Kullanıcı adı veya e-mail adresi hatalı",
-
-    "token"    => "Şifre sıfırlama anahtarı geçersiz.",
-
-    "sent" => "Eşleşen email bulunsaydı, şifre gönderilirdi!",
+    "token"    => 'Bu şifre sıfırlama jetonu ya geçersiz, ya süresi dolmuş, ya da girilen kullanıcı adıyla uyuşmuyor.',
+    'sent'	   => 'Bu e-posta adresiyle bir kullanıcı mevcutsa, o adrese bir şifre kurtarma maili gönderildi.',
 
 );

@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Los passwords deben tener mínimo 6 caracteres y coincidir.",
-
     "user"     => "Usuario o E-Mail incorrectos",
-
-    "token"    => "El token para resetear el password no es válido.",
-
-    "sent" => "Si existe cuenta con el e-mail introducido, se enviará mensaje para resetear el password!",
+    "token"    => 'Este token de restablecimiento de contraseña es inválido o ha caducado, o no coincide con el nombre de usuario proporcionado.',
+    'sent'	   => 'Si existe un usuario con una dirección de correo electrónico válida en nuestro sistema, se ha enviado un correo electrónico de recuperación de contraseña.',
 
 );

@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -30,9 +31,9 @@ class ConsumablesController extends Controller
     public function index()
     {
         $this->authorize('index', Consumable::class);
+
         return view('consumables/index');
     }
-
 
     /**
      * Return a view to display the form view to create a new consumable
@@ -46,10 +47,10 @@ class ConsumablesController extends Controller
     public function create()
     {
         $this->authorize('create', Consumable::class);
+
         return view('consumables/edit')->with('category_type', 'consumable')
             ->with('item', new Consumable);
     }
-
 
     /**
      * Validate and store new consumable data.
@@ -75,9 +76,10 @@ class ConsumablesController extends Controller
         $consumable->model_number           = $request->input('model_number');
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
+        $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
+        $consumable->notes                  = $request->input('notes');
 
 
         $consumable = $request->handleImages($consumable);
@@ -87,7 +89,6 @@ class ConsumablesController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
-
     }
 
     /**
@@ -104,13 +105,12 @@ class ConsumablesController extends Controller
     {
         if ($item = Consumable::find($consumableId)) {
             $this->authorize($item);
+
             return view('consumables/edit', compact('item'))->with('category_type', 'consumable');
         }
 
         return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
-
     }
-
 
     /**
      * Returns a form view to edit a consumable.
@@ -129,6 +129,17 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
 
+        $min = $consumable->numCheckedOut();
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|min:$min"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $this->authorize($consumable);
 
         $consumable->name                   = $request->input('name');
@@ -141,14 +152,16 @@ class ConsumablesController extends Controller
         $consumable->model_number           = $request->input('model_number');
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
+        $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
+        $consumable->notes                  = $request->input('notes');
 
         $consumable = $request->handleImages($consumable);
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
     }
 
@@ -189,8 +202,8 @@ class ConsumablesController extends Controller
         if (isset($consumable->id)) {
             return view('consumables/view', compact('consumable'));
         }
+
         return redirect()->route('consumables.index')
             ->with('error', trans('admin/consumables/message.does_not_exist'));
     }
-
 }

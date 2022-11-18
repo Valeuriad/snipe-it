@@ -48,6 +48,7 @@ class ResetDemoSettings extends Command
         $settings->auto_increment_assets = 1;
         $settings->logo = 'snipe-logo.png';
         $settings->alert_email = 'service@snipe-it.io';
+        $settings->login_note = 'Use `admin` / `password` to login to the demo.';
         $settings->header_color = null;
         $settings->barcode_type = 'QRCODE';
         $settings->default_currency = 'USD';
@@ -81,6 +82,8 @@ class ResetDemoSettings extends Command
             $user->save();
         }
 
+        \Storage::disk('public')->put('snipe-logo.png', file_get_contents(public_path('img/demo/snipe-logo.png')));
+        \Storage::disk('public')->put('snipe-logo-lg.png', file_get_contents(public_path('img/demo/snipe-logo-lg.png')));
 
     }
 

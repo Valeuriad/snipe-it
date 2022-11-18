@@ -49,6 +49,12 @@ return array(
 
     ),
 
+    'fieldset_default_value' => array(
+
+        'error' => 'Błąd podczas sprawdzania domyślnych wartości zestawu pól.',
+
+    ),
+
 
 
 

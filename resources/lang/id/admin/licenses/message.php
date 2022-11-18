@@ -2,13 +2,13 @@
 
 return array(
 
-    'does_not_exist' => 'Lisensi tidak ada.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Pengguna tidak ada.',
     'asset_does_not_exist' 	=> 'Aset yang hendak di asosiasikan dengan lisensi ini tidak ada.',
     'owner_doesnt_match_asset' => 'Aset yang hendak di asosiasikan dengan lisensi ini di miliki oleh seseorang yang tidak masuk dalam daftar.',
     'assoc_users'	 => 'Lisensi ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek lisensi terlebih dahulu kemudian coba hapus kembali. ',
     'select_asset_or_person' => 'Anda harus memilih aset atau pengguna, namun tidak keduanya.',
-    'not_found' => 'License not found',
+    'not_found' => 'Berkas Lisensi tidak ditemukan',
 
 
     'create' => array(

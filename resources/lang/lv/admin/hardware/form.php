@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Apstiprināt lielapjoma aktīvu dzēšanu',
+return [
+    'bulk_delete'		=> 'Apstiprināt lielapjoma aktīvu dzēšanu',
   'bulk_delete_help'	=> 'Pārskatīt aktīvu lielapjoma dzēšanu zemāk. Dzēstos aktīvus var atjaunot, bet tie vairs nebūs saistīti ar šībrīža lietotāju.',
   'bulk_delete_warn'	=> 'Jūs gatavojaties dzēst: asset_count aktīvi.',
-	'bulk_update'		=> 'Lielapjoma atjaunināšanas līdzekļi',
-	'bulk_update_help'	=> 'Šī veidlapa ļauj vienlaikus atjaunināt vairākus aktīvus. Aizpildiet tikai nepieciešamos laukus. Jebkurš tukšs laukums paliek nemainīgs.',
-	'bulk_update_warn'	=> 'Jūs gatavojaties rediģēt: asset_count īpašumus.',
+    'bulk_update'		=> 'Lielapjoma atjaunināšanas līdzekļi',
+    'bulk_update_help'	=> 'Šī veidlapa ļauj vienlaikus atjaunināt vairākus aktīvus. Aizpildiet tikai nepieciešamos laukus. Jebkurš tukšs laukums paliek nemainīgs.',
+    'bulk_update_warn'	=> 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Izrakstīts uz',
     'checkout_date'		=> 'Izrakstīšanās datums',
     'checkin_date'		=> 'Reģistrēšanās datums',
@@ -38,7 +38,14 @@ return array(
     'tag'				=> 'Asset Tag',
     'update'			=> 'Aktīvu atjaunošana',
     'warranty'			=> 'Garantija',
-		'warranty_expires'		=> 'Garantija beidzās',
+        'warranty_expires'		=> 'Garantija beidzās',
     'years'				=> 'gadiem',
-)
-;
+    'asset_location' => 'Atjaunināt pamatlīdzekļa atrašanās vietu',
+    'asset_location_update_default_current' => 'Atjaunināt noklusējuma KĀ ARĪ tekošo atrašanās vietu',
+    'asset_location_update_default' => 'Atjaunināt tikai noklusēja atrašanās vietu',
+    'asset_not_deployable' => 'Šis statuss nav izmantojams. Pamatlīdzeklis nevar tikt izrakstīts.',
+    'asset_deployable' => 'Šis statuss ir izmantojams. Pamatlīdzeklis ir pieejams izrakstīšanai.',
+    'processing_spinner' => 'Apstrādā...',
+    'optional_infos'  => 'Neobligātā informācija',
+    'order_details'   => 'Pasūtījuma informācija'
+];

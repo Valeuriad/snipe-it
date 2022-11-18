@@ -2,13 +2,13 @@
 
 return array(
 
-    'does_not_exist' => 'Licence neeksistē.',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => 'Lietotājs neeksistē.',
     'asset_does_not_exist' 	=> 'Aktīvs, kuru jūs mēģināt saistīt ar šo licenci, nepastāv.',
     'owner_doesnt_match_asset' => 'Aktīvs, kuru jūs mēģināt saistīt ar šo licenci, ir īpašumā somene, kas nav persona, kas atlasīta nolaižamajā sarakstā piešķirtajam.',
     'assoc_users'	 => 'Šobrīd šī licence tiek izrakstīta lietotājam un to nevar izdzēst. Vispirms pārbaudiet licenci un pēc tam mēģiniet dzēst vēlreiz.',
     'select_asset_or_person' => 'Jums jāizvēlas aktīvs vai lietotājs, bet ne abi.',
-    'not_found' => 'License not found',
+    'not_found' => 'Licence nav atrasta',
 
 
     'create' => array(
