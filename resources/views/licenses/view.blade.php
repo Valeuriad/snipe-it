@@ -7,35 +7,75 @@
 @parent
 @stop
 
-{{-- Right header --}}
-@section('header_right')
-<div class="btn-group pull-right">
-  @can('update', $license)
-    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-        <li role="menuitem"><a href="{{ route('licenses.edit', ['license' => $license->id]) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
-        <li role="menuitem"><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
-    </ul>
-   @endcan
-</div>
-@stop
-
 {{-- Page content --}}
 @section('content')
 <div class="row">
   <div class="col-md-12">
+
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-        <li><a href="#seats" data-toggle="tab">{{ trans('admin/licenses/form.seats') }}</a></li>
-        @can('files', $license)
-        <li><a href="#uploads" data-toggle="tab">{{ trans('general.file_uploads') }}</a></li>
+      
+      <ul class="nav nav-tabs hidden-print">
+
+        <li class="active">
+          <a href="#details" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#seats" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="far fa-list-alt fa-2x" aria-hidden="true"></i>
+              </span>
+              <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
+              <span class="badge badge-secondary">{{ number_format($license->availCount()->count()) }} / {{ number_format($license->seats) }}</span>
+
+            </a>
+        </li>
+
+        @can('licenses.files', $license)
+        <li>
+          <a href="#files" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="far fa-file fa-2x" aria-hidden="true"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
+              {!! ($license->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($license->uploads->count()).'</badge>' : '' !!}
+            </span>
+          </a>
+        </li>
         @endcan
-        <li><a href="#history" data-toggle="tab">{{ trans('admin/licenses/general.checkout_history') }}</a></li>
-        <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a></li>
+
+        <li>
+          <a href="#history" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fas fa-history fa-2x" aria-hidden="true"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
+          </a>
+        </li>
+
+    
+        @can('update', $license)
+          <li class="dropdown pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fas fa-cog" aria-hidden="true"></i> {{ trans('button.actions') }}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ route('licenses.edit', $license->id) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
+              <li><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
+            </ul>
+          </li>
+        @endcan
+
+        @can('update', \App\Models\License::class)
+          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+          </li>
+        @endcan
       </ul>
 
       <div class="tab-content">
@@ -43,25 +83,25 @@
         <div class="tab-pane active" id="details">
           <div class="row">
             <div class="col-md-12">
-              <div class="container row-striped">
+              <div class="container row-new-striped">
 
                 @if (!is_null($license->company))
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>{{ trans('general.company') }}</strong>
                     </div>
-                    <div class="col-md-8">
-                      {{ $license->company->name }}
+                    <div class="col-md-9">
+                      <a href="{{ route('companies.show', $license->company->id) }}">{{ $license->company->name }}</a>
                     </div>
                   </div>
                 @endif
 
                 @if ($license->manufacturer)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>{{ trans('admin/hardware/form.manufacturer') }}</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       @can('view', \App\Models\Manufacturer::class)
                         <a href="{{ route('manufacturers.show', $license->manufacturer->id) }}">
                           {{ $license->manufacturer->name }}
@@ -71,21 +111,21 @@
                       @endcan
 
                       @if ($license->manufacturer->url)
-                        <br><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
+                        <br><i class="fas fa-globe-americas" aria-hidden="true"></i> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
                       @endif
 
                       @if ($license->manufacturer->support_url)
-                        <br><i class="fa fa-life-ring" aria-hidden="true"></i>
+                        <br><i class="far fa-life-ring" aria-hidden="true"></i>
                         <a href="{{ $license->manufacturer->support_url }}"  rel="noopener">{{ $license->manufacturer->support_url }}</a>
                       @endif
 
                       @if ($license->manufacturer->support_phone)
-                        <br><i class="fa fa-phone" aria-hidden="true"></i>
+                        <br><i class="fas fa-phone" aria-hidden="true"></i>
                         <a href="tel:{{ $license->manufacturer->support_phone }}">{{ $license->manufacturer->support_phone }}</a>
                       @endif
 
                       @if ($license->manufacturer->support_email)
-                        <br><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
+                        <br><i class="far fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
                       @endif
                     </div>
                   </div>
@@ -94,10 +134,10 @@
 
                 @if (!is_null($license->serial))
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>{{ trans('admin/licenses/form.license_key') }}</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       @can('viewKeys', $license)
                         {!! nl2br(e($license->serial)) !!}
                       @else
@@ -110,10 +150,10 @@
 
                 @if ($license->category)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>{{ trans('general.category') }}</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       <a href="{{ route('categories.show', $license->category->id) }}">{{ $license->category->name }}</a>
                     </div>
                   </div>
@@ -122,10 +162,10 @@
 
                 @if ($license->license_name!='')
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>{{ trans('admin/licenses/form.to_name') }}</strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       {{ $license->license_name }}
                     </div>
                   </div>
@@ -133,12 +173,12 @@
 
                 @if ($license->license_email!='')
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('admin/licenses/form.to_email') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       {{ $license->license_email }}
                     </div>
                   </div>
@@ -147,12 +187,12 @@
 
                 @if ($license->supplier_id)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('general.supplier') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       <a href="{{ route('suppliers.show', $license->supplier_id) }}">
                         {{ $license->supplier->name }}
                       </a>
@@ -163,26 +203,26 @@
 
                 @if (isset($license->expiration_date))
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <strong>
                       {{ trans('admin/licenses/form.expiration') }}
                     </strong>
                   </div>
-                  <div class="col-md-8">
-                    {{ \App\Helpers\Helper::getFormattedDateObject($license->expiration_date, 'date', false) }}
+                  <div class="col-md-9">
+                    {{ Helper::getFormattedDateObject($license->expiration_date, 'date', false) }}
                   </div>
                 </div>
                 @endif
 
                 @if ($license->termination_date)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('admin/licenses/form.termination_date') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
-                      {{ \App\Helpers\Helper::getFormattedDateObject($license->termination_date, 'date', false) }}
+                    <div class="col-md-9">
+                      {{ Helper::getFormattedDateObject($license->termination_date, 'date', false) }}
                     </div>
                   </div>
                 @endif
@@ -190,12 +230,12 @@
 
                 @if ($license->depreciation)
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <strong>
                       {{ trans('admin/hardware/form.depreciation') }}
                     </strong>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-9">
                     {{ $license->depreciation->name }}
                     ({{ $license->depreciation->months }}
                     {{ trans('admin/hardware/form.months') }}
@@ -204,24 +244,24 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <strong>
                       {{ trans('admin/hardware/form.depreciates_on') }}
                     </strong>
                   </div>
-                  <div class="col-md-8">
-                    {{ \App\Helpers\Helper::getFormattedDateObject($license->depreciated_date(), 'date', false) }}
+                  <div class="col-md-9">
+                    {{ Helper::getFormattedDateObject($license->depreciated_date(), 'date', false) }}
                   </div>
                 </div>
 
 
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <strong>
                       {{ trans('admin/hardware/form.fully_depreciated') }}
                     </strong>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-9">
                     @if ($license->time_until_depreciated()->y > 0)
                       {{ $license->time_until_depreciated()->y }}
                       {{ trans('admin/hardware/form.years') }},
@@ -234,12 +274,12 @@
 
                   @if ($license->purchase_order)
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <strong>
                       {{ trans('admin/licenses/form.purchase_order') }}
                     </strong>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-9">
                     {{ $license->purchase_order }}
                   </div>
                 </div>
@@ -248,11 +288,11 @@
 
                 @if (isset($license->purchase_date))
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <strong>{{ trans('general.purchase_date') }}</strong>
                   </div>
-                  <div class="col-md-8">
-                    {{ \App\Helpers\Helper::getFormattedDateObject($license->purchase_date, 'date', false) }}
+                  <div class="col-md-9">
+                    {{ Helper::getFormattedDateObject($license->purchase_date, 'date', false) }}
 
                   </div>
                 </div>
@@ -260,39 +300,50 @@
 
                   @if ($license->purchase_cost > 0)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('general.purchase_cost') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       {{ $snipeSettings->default_currency }}
-                      {{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}
+                      {{ Helper::formatCurrencyOutput($license->purchase_cost) }}
                     </div>
                   </div>
                   @endif
 
                   @if ($license->order_number)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('general.order_number') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       {{ $license->order_number }}
                     </div>
                   </div>
                   @endif
 
+                  <div class="row">
+                    <div class="col-md-3">
+                      <strong>
+                        {{ trans('admin/licenses/form.maintained') }}
+                      </strong>
+                    </div>
+                    <div class="col-md-9">
+                      {!! $license->maintained ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no') !!}
+                    </div>
+                  </div>
+
                   @if (($license->seats) && ($license->seats) > 0)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('admin/licenses/form.seats') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       {{ $license->seats }}
                     </div>
                   </div>
@@ -301,12 +352,12 @@
 
 
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('admin/licenses/form.reassignable') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       {{ $license->reassignable ? 'Yes' : 'No' }}
                     </div>
                   </div>
@@ -314,12 +365,12 @@
 
                   @if ($license->notes)
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <strong>
                         {{ trans('general.notes') }}
                       </strong>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       {!! nl2br(e($license->notes)) !!}
                     </div>
                   </div>
@@ -347,6 +398,7 @@
                         data-search="false"
                         data-side-pagination="server"
                         data-show-columns="true"
+                        data-show-fullscreen="true"
                         data-show-export="true"
                         data-show-refresh="true"
                         data-sort-order="asc"
@@ -366,8 +418,8 @@
           </div> <!--/.row-->
         </div> <!-- /.tab-pane -->
 
-        @can('files', $license)
-        <div class="tab-pane" id="uploads">
+        @can('licenses.files', $license)
+        <div class="tab-pane" id="files">
           <div class="table-responsive">
             <table
                 data-cookie-id-table="licenseUploadsTable"
@@ -390,13 +442,14 @@
                     }'>
             <thead>
               <tr>
-                <th data-visible="true" aria-hidden="true">Icon</th>
-                <th class="col-md-4" data-field="file_name" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
-                <th class="col-md-4" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
-                <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
-                <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.image') }}</th>
-                <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">Download</th>
-                <th class="col-md-2" data-field="delete" data-visible="true"  data-sortable="false" data-switchable="true">Delete</th>
+                <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
+                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -404,46 +457,53 @@
               @foreach ($license->uploads as $file)
               <tr>
                 <td>
-                  <i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                  <span class="sr-only">{{ \App\Helpers\Helper::filetype_icon($file->filename) }}</span>
+                  <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
+                  <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
 
                 </td>
                 <td>
-                  {{ $file->filename }}
-
+                  @if ($file->filename)
+                    @if ((Storage::exists('private_uploads/licenses/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('licenses'))))
+                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                    @endif
+                  @endif
                 </td>
+                <td>
+                  @if (Storage::exists('private_uploads/licenses/'.$file->filename))
+                    {{ $file->filename }}
+                  @else
+                    <del>{{ $file->filename }}</del>
+                  @endif
+                </td>
+                <td data-value="{{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Storage::size('private_uploads/licenses/'.$file->filename) : '' }}">
+                  {{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/licenses/'.$file->filename)) : '' }}
+                </td>
+
                 <td>
                   @if ($file->note)
                     {{ $file->note }}
                   @endif
                 </td>
-                <td>{{ $file->created_at }}</td>
-                <td>
-                @if ($file->filename)
-                    @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('licenses')))
-                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                    @endif
-                @endif
-                </td>
                 <td>
                   @if ($file->filename)
                     <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default">
-                      <i class="fa fa-download" aria-hidden="true"></i>
-                      <span class="sr-only">Download</span>
+                      <i class="fas fa-download" aria-hidden="true"></i>
+                      <span class="sr-only">{{ trans('general.download') }}</span>
                     </a>
                   @endif
                 </td>
+                <td>{{ $file->created_at }}</td>
                 <td>
-                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
-                    <i class="fa fa-trash icon-white" aria-hidden="true"></i>
-                    <span class="sr-only">Delete</span>
+                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
+                    <i class="fas fa-trash icon-white" aria-hidden="true"></i>
+                    <span class="sr-only">{{ trans('general.delete') }}</span>
                   </a>
                 </td>
               </tr>
               @endforeach
             @else
               <tr>
-              <td colspan="6">{{ trans('general.no_results') }}</td>
+              <td colspan="8">{{ trans('general.no_results') }}</td>
               </tr>
             @endif
             </tbody>
@@ -507,4 +567,3 @@
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
 @stop
-

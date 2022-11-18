@@ -13,6 +13,8 @@ return array(
     'user_deleted_warning'      => 'Hierdie gebruiker is verwyder. Jy sal hierdie gebruiker moet herstel om hulle te wysig of nuwe bates toe te ken.',
     'ldap_not_configured'        => 'LDAP-integrasie is nie vir hierdie installasie gekonfigureer nie.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

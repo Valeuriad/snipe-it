@@ -13,6 +13,8 @@ return array(
     'user_deleted_warning'      => 'Šis lietotājs ir izdzēsts. Jums būs jāatjauno šis lietotājs, lai tos rediģētu vai piešķirtu tiem jaunus aktīvus.',
     'ldap_not_configured'        => 'LDAP integrācija nav konfigurēta šai instalācijai.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

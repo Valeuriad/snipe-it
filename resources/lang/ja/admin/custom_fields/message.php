@@ -49,6 +49,12 @@ return array(
 
     ),
 
+    'fieldset_default_value' => array(
+
+        'error' => 'デフォルトのフィールドセット値の検証中にエラーが発生しました。',
+
+    ),
+
 
 
 

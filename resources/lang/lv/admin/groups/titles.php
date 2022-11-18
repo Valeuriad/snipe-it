@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Par grupām',
     'about_groups'                  => 'Grupas tiek izmantotas, lai vispārinātu lietotāju atļaujas.',
     'group_management' 	 	=> 'Grupas vadība',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Grupas administrators',
     'allow' 	 			=> 'Atļaut',
     'deny' 	 				=> 'Liegties',
-
-);
+    'permission'            => 'Piekļuves tiesības',
+    'grant'                 => 'Piešķirt',
+    'no_permissions'        => 'Šai grupai nav nevienu pieejas tiesību.'
+];

@@ -49,6 +49,13 @@ return array(
 
     ),
 
+    'fieldset_default_value' => array(
+
+        'error' => 'خطا در اعتبارسنجی مقادیر مجموعه فیلدهای پیش‌فرض.
+',
+
+    ),
+
 
 
 

@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'No. Empleado',
     'first_name' 			=> 'Nombre',
-    'groupnotes'			=> 'Selecciona grupo que se asigna al usuario, recuerda que el usuario tiene los permisos del grupo al que se asigna.',
+    'groupnotes'			=> 'Selecciona un grupo para asignar al usuario, recuerda que un usuario toma los permisos del grupo al que están asignados. Usa ctrl+clic (o cmd+clic en MacOS) para deseleccionar grupos.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Hereda de',
     'job' 					=> 'Departamento',

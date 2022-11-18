@@ -13,6 +13,8 @@ return array(
     'user_deleted_warning'      => 'تم حذف المستخدم. سيكون عليك استعادة هذا المستخدم اذا ارت التعديل عليه او تسليمه اجهزة جديدة.',
     'ldap_not_configured'        => 'لم يتم تكوين دمج لداب لهذا التثبيت.',
     'password_resets_sent'      => 'تم إرسال رابط إعادة تعيين كلمة المرور للمستخدمين المحددين الذين تم تفعيلهم ولديهم عناوين بريد إلكتروني صالحة.',
+    'password_reset_sent'       => 'تم إرسال رابط إعادة تعيين كلمة المرور إلى البريد الإلكتروني!',
+    'user_has_no_email'         => 'This user does not have an email address in their profile.',
 
 
     'success' => array(

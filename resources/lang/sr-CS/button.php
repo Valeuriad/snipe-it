@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Akcije',
     'add'    	                => 'Dodaj Novo',
     'cancel'                    => 'Otkaži',
@@ -8,10 +8,17 @@ return array(
     'delete'  	                => 'Izbrisati',
     'edit'    	                => 'Uredi',
     'restore' 	                => 'Vratiti',
+    'remove'                    => 'Ukloni',
     'request'                   => 'Zahtev',
-    'submit'  	                => 'Submit',
+    'submit'  	                => 'Podnesi',
     'upload'                    => 'Upload',
-	'select_file'				=> 'Odaberite datoteku...',
+    'select_file'				=> 'Odaberite datoteku...',
     'select_files'				=> 'Odaberite datoteke...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+    'generate_labels'           => '{1} Generiši nalepnicu|[2,*] Generiši nalepnice',
+    'send_password_link'        => 'Pošalji vezu za reset lozinke',
+    'go'                        => 'Kreni',
+    'bulk_actions'              => 'Masovne radnje',
+    'add_maintenance'           => 'Dodaj održavanje',
+    'append'                    => 'Nadoveži',
+    'new'                       => 'Novo',
+];

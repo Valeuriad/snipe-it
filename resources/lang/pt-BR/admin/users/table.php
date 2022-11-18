@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-mail',
     'employee_num'      	=> 'Nº do Funcionário',
     'first_name' 			=> 'Primeiro Nome',
-    'groupnotes'			=> 'Selecione um grupo para atribuir ao usuário, lembre-se que um usuário tem todas as permissões do grupo que ele está atribuído.',
+    'groupnotes'			=> 'Selecione um grupo para atribuir ao usuário, lembre-se que um usuário tem as permissões do grupo que ele está atribuído. Use ctrl+click (ou cmd+clique no MacOS) para desmarcar os grupos.',
     'id'         			=> 'Id',
     'inherit'  				=> 'Herdar',
     'job' 					=> 'Cargo',

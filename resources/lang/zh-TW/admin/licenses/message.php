@@ -2,13 +2,13 @@
 
 return array(
 
-    'does_not_exist' => '授權不存在。',
+    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
     'user_does_not_exist' => '使用者不存在',
     'asset_does_not_exist' 	=> '您正在授權的資產不存在。',
     'owner_doesnt_match_asset' => '您正在授權的資產已被其他人佔用，請重新選擇。',
     'assoc_users'	 => '此授權已分配給某個使用者，目前不能被刪除，請檢查後重試。',
     'select_asset_or_person' => '您必須選擇資產或用戶，但不能同時選擇兩者。',
-    'not_found' => 'License not found',
+    'not_found' => '找不到授權',
 
 
     'create' => array(

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "更多資訊",
+    'more_info_title' => '更多資訊',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
 
@@ -25,12 +25,10 @@ return array(
 
     'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => '零組件是指作為資產的一部份項目，例如硬碟、記憶體、其他等。',
 
     'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
 
     'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
 
-
-
-);
+];

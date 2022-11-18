@@ -10,7 +10,7 @@ return array(
     'email'      			=> 'E-Posta',
     'employee_num'      	=> 'Çalışan No.',
     'first_name' 			=> 'Ad',
-    'groupnotes'			=> 'Kullanıcıya atamak için bir grup seçin, Kullanıcı yetkilerini atandığı gruptan alacaktır.',
+    'groupnotes'			=> 'Kullanıcıya atanacak bir grup seçin, kullanıcının atandığı grubun izinlerini aldığını unutmayın. Grupların seçimini kaldırmak için ctrl+tıklama (veya MacOS\'ta cmd+tıklama) tuşlarını kullanın.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Devral',
     'job' 					=> 'İş Ünvanı',

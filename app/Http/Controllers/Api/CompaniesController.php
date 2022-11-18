@@ -8,6 +8,7 @@ use App\Http\Transformers\CompaniesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 class CompaniesController extends Controller
@@ -36,11 +37,16 @@ class CompaniesController extends Controller
             'components_count',
         ];
 
-        $companies = Company::withCount('assets as assets_count','licenses as licenses_count','accessories as accessories_count','consumables as consumables_count','components as components_count','users as users_count');
+        $companies = Company::withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'users as users_count');
 
         if ($request->filled('search')) {
             $companies->TextSearch($request->input('search'));
         }
+
+        if ($request->filled('name')) {
+            $companies->where('name', '=', $request->input('name'));
+        }
+
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
@@ -65,21 +71,22 @@ class CompaniesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Company::class);
         $company = new Company;
         $company->fill($request->all());
-
+        $company = $request->handleImages($company);
+        
         if ($company->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new CompaniesTransformer)->transformCompany($company), trans('admin/companies/message.create.success')));
         }
+
         return response()
             ->json(Helper::formatStandardApiResponse('error', null, $company->getErrors()));
-
     }
 
     /**
@@ -104,15 +111,16 @@ class CompaniesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Company::class);
         $company = Company::findOrFail($id);
         $company->fill($request->all());
+        $company = $request->handleImages($company);
 
         if ($company->save()) {
             return response()
@@ -137,13 +145,14 @@ class CompaniesController extends Controller
         $company = Company::findOrFail($id);
         $this->authorize('delete', $company);
 
-        if ( !$company->isDeletable() ) {
+        if (! $company->isDeletable()) {
             return response()
-                    ->json(Helper::formatStandardApiResponse('error', null,  trans('admin/companies/message.assoc_users')));
+                    ->json(Helper::formatStandardApiResponse('error', null, trans('admin/companies/message.assoc_users')));
         }
         $company->delete();
+
         return response()
-            ->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
+            ->json(Helper::formatStandardApiResponse('success', null, trans('admin/companies/message.delete.success')));
     }
 
     /**
@@ -152,11 +161,10 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
-
+        $this->authorize('view.selectlists');
         $companies = Company::select([
             'companies.id',
             'companies.name',

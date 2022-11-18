@@ -14,11 +14,8 @@ return array(
     */
 
     "password" => "Mật khẩu phải có tối thiểu 6 ký tự và trùng với thông tin xác nhận.",
-
     "user"     => "Tên đăng nhập và địa chỉ email không đúng",
-
-    "token"    => "Token khởi tạo mật khẩu này không hợp lệ.",
-
-    "sent" => "Nếu tìm thấy một địa chỉ email phù hợp, một thông báo mật khẩu đã được gửi đi!",
+    "token"    => 'Mã đặt lại mật khẩu này không hợp lệ hoặc đã hết hạn, hoặc không khớp với tên người dùng vừa cung cấp.',
+    'sent'	   => 'Nếu email của bạn vừa cung cấp có tồn tại trên hệ thống, một email khôi phục mật khẩu sẽ được gửi.',
 
 );

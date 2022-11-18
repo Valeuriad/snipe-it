@@ -1,6 +1,8 @@
 <?php
 
-return array(
+return [
+    'acceptance_asset_accepted' => 'A user has accepted an item',
+    'acceptance_asset_declined' => 'A user has declined an item',
     'a_user_canceled' => 'Kua whakakorea e tetahi kaiwhakamahi tetahi tonoemi i runga i te paetukutuku',
     'a_user_requested' => 'Kua tono tetahi kaiwhakamahi i tetahi mea i runga i te paetukutuku',
     'accessory_name' => 'Ingoa Whakauru:',
@@ -9,7 +11,7 @@ return array(
     'asset' => 'Tahua:',
     'asset_name' => 'Ingoa Ahua:',
     'asset_requested' => 'Ka tonohia te taonga',
-    'asset_tag' => 'Tae Tūemi:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Tohua Ki To',
     'best_regards' => 'Ko nga whakaaro pai,',
     'canceled' => 'Kua whakakorehia:',
@@ -59,7 +61,7 @@ return array(
     'test_mail_text' => 'He whakamatautau tenei mai i te Pūnaha Whakahaere Utu Snipe-IT. Mena kua whiwhi koe i tenei, kei te mahi te miihana :)',
     'the_following_item' => 'Kua tohua te mea e whai ake nei i:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Hei tautuhi i to: kupuhipa tukutuku, whakaoti i tenei puka:',
     'type' => 'Momo',
@@ -75,5 +77,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];
