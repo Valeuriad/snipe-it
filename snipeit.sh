@@ -200,19 +200,19 @@ install_snipeit () {
   mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
   echo "* Cloning Snipe-IT from github to the web directory."
-  log "git clone https://github.com/snipe/snipe-it $APP_PATH"
+  log "cp -rf * $APP_PATH"
 
-  echo "* Configuring .env file."
-  cp "$APP_PATH/.env.example" "$APP_PATH/.env"
+  #echo "* Configuring .env file."
+  #cp "$APP_PATH/.env.example" "$APP_PATH/.env"
 
   #TODO escape SED delimiter in variables
-  sed -i '1 i\#Created By Snipe-it Installer' "$APP_PATH/.env"
-  sed -i "s|^\\(APP_TIMEZONE=\\).*|\\1$tzone|" "$APP_PATH/.env"
-  sed -i "s|^\\(DB_HOST=\\).*|\\1localhost|" "$APP_PATH/.env"
-  sed -i "s|^\\(DB_DATABASE=\\).*|\\1snipeit|" "$APP_PATH/.env"
-  sed -i "s|^\\(DB_USERNAME=\\).*|\\1snipeit|" "$APP_PATH/.env"
-  sed -i "s|^\\(DB_PASSWORD=\\).*|\\1'$mysqluserpw'|" "$APP_PATH/.env"
-  sed -i "s|^\\(APP_URL=\\).*|\\1http://$fqdn|" "$APP_PATH/.env"
+  #sed -i '1 i\#Created By Snipe-it Installer' "$APP_PATH/.env"
+  #sed -i "s|^\\(APP_TIMEZONE=\\).*|\\1$tzone|" "$APP_PATH/.env"
+  #sed -i "s|^\\(DB_HOST=\\).*|\\1localhost|" "$APP_PATH/.env"
+  #sed -i "s|^\\(DB_DATABASE=\\).*|\\1snipeit|" "$APP_PATH/.env"
+  #sed -i "s|^\\(DB_USERNAME=\\).*|\\1snipeit|" "$APP_PATH/.env"
+  #sed -i "s|^\\(DB_PASSWORD=\\).*|\\1'$mysqluserpw'|" "$APP_PATH/.env"
+  #sed -i "s|^\\(APP_URL=\\).*|\\1http://$fqdn|" "$APP_PATH/.env"
 
   echo "* Installing composer."
   install_composer
@@ -853,7 +853,7 @@ echo "  ***Open http://$fqdn to login to Snipe-IT.***"
 echo ""
 echo ""
 echo "* Cleaning up..."
-rm -f snipeit.sh
-rm -f install.sh
+#rm -f snipeit.sh
+#rm -f install.sh
 echo "* Finished!"
 sleep 1
