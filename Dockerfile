@@ -63,6 +63,7 @@ RUN bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/8.1/mods-
 RUN phpenmod mcrypt
 RUN phpenmod gd
 RUN phpenmod bcmath
+RUN phpenmod curl
 
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/8.1/apache2/php.ini
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/8.1/cli/php.ini
