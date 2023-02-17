@@ -410,7 +410,7 @@ class LoginController extends Controller
     if (!$user) {
       $first_name   = $google->offsetGet('given_name');
       $last_name    = $google->offsetGet('family_name');
-      $username     = substr($first_name, 0, 1).replace(' ', '', $last_name)
+      $username     = substr($first_name, 0, 1).replace(' ', '', $last_name);
       $user_id      = $google->getId();
       $user_email   = $google->getEmail();
       $user_avatar  = $google->getAvatar();
@@ -443,11 +443,11 @@ class LoginController extends Controller
 
       // bit of log to show what user has just been created
       Log::notice('########### New User created  : ');
-      Log::notice('########### FirstName         : ' . $first_name;
-      Log::notice('########### LastName          : ' . $last_name;
-      Log::notice('########### Google id         : ' . $user_id;
-      Log::notice('########### email             : ' . $user_email;
-      Log::notice('########### avatar            : ' . $user_avatar;
+      Log::notice('########### FirstName         : ' . $first_name);
+      Log::notice('########### LastName          : ' . $last_name);
+      Log::notice('########### Google id         : ' . $user_id);
+      Log::notice('########### email             : ' . $user_email);
+      Log::notice('########### avatar            : ' . $user_avatar);
     }
 
     auth()->login($user);
