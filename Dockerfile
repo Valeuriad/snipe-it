@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 LABEL maintainer="Brady Wetherington <bwetherington@grokability.com>"
 
 # No need to add `apt-get clean` here, reference:
@@ -8,7 +8,8 @@ LABEL maintainer="Brady Wetherington <bwetherington@grokability.com>"
 RUN apt-get update -qqy \
 && apt-get install -qqy \
 software-properties-common \
-&& add-apt-repository ppa:ondrej/php
+&& add-apt-repository -y ppa:ondrej/php \
+&& add-apt-repository -y 'deb http://fr.archive.ubuntu.com/ubuntu jammy main universe'
 
 RUN export DEBIAN_FRONTEND=noninteractive; \
     export DEBCONF_NONINTERACTIVE_SEEN=true; \
@@ -19,6 +20,8 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
 apt-utils \
 apache2 \
 apache2-bin \
+php8.1-cli \
+php8.1-dev \
 libapache2-mod-php8.1 \
 php8.1-curl \
 php8.1-ldap \
@@ -45,25 +48,26 @@ autoconf \
 libc-dev \
 pkg-config \
 libmcrypt-dev \
-php8.1-dev \
 ca-certificates \
 unzip \
 dnsutils \
-&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+expect \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+apt-get remove -y php8.2-cli
 
-# Pear
-RUN curl -s -o /tmp/go-pear.phar http://pear.php.net/go-pear.phar && \
-    echo '/usr/bin/php /tmp/go-pear.phar "$@"' > /usr/bin/pear && \
-    chmod +x /usr/bin/pear && \
-    pear install
-RUN pear install mcrypt-1.0.3
+# Install mcrypt php module
+COPY docker/*.exp /tmp/
+RUN chmod +x /tmp/*.exp && \
+    /tmp/install-pear.exp && \
+    pear update-channels && \
+    /tmp/install-mcrypt.exp
 
-RUN bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/8.1/mods-available/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20210902/mcrypt.so > /etc/php/8.1/mods-available/mcrypt.ini"
 
-RUN phpenmod mcrypt
-RUN phpenmod gd
-RUN phpenmod bcmath
-RUN phpenmod curl
+RUN phpenmod mcrypt && \
+    phpenmod gd && \
+    phpenmod bcmath && \
+    phpenmod curl
 
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/8.1/apache2/php.ini
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/8.1/cli/php.ini
@@ -76,12 +80,12 @@ RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
 COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 #SSL
-RUN mkdir -p /var/lib/snipeit/ssl
+#RUN mkdir -p /var/lib/snipeit/ssl
 #COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
-COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
+#COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
 
-RUN a2enmod ssl
-RUN a2ensite 001-default-ssl.conf
+#RUN a2enmod ssl
+#RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
 
