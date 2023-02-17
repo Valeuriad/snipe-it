@@ -1,0 +1,7 @@
+#!/usr/bin/expect
+
+set timeout 120
+spawn pecl install mcrypt-1.0.5
+expect "libmcrypt prefix?"
+send "\r"
+expect eof
