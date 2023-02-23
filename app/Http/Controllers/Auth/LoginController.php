@@ -410,7 +410,7 @@ class LoginController extends Controller
     if (!$user) {
       $first_name   = $google->offsetGet('given_name');
       $last_name    = $google->offsetGet('family_name');
-      $username     = substr($first_name, 0, 1).replace(' ', '', $last_name);
+      $username     = substr($first_name, 0, 1).str_replace(' ', '', $last_name);
       $user_id      = $google->getId();
       $user_email   = $google->getEmail();
       $user_avatar  = $google->getAvatar();
