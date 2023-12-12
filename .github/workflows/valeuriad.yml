@@ -3,7 +3,7 @@ name: Valeuriad
 on:
   push:
     branches:
-      - main
+      - '*'
   release:
     types:
       - created
