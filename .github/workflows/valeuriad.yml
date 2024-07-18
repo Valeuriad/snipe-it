@@ -39,7 +39,7 @@ jobs:
         
       - name: Build and Push Docker Snapshot Image
         run: |
-          docker build -t $CONTAINER_REGISTRY_SNAPSHOTS/snipe-it/app:latest -t $CONTAINER_REGISTRY_SNAPSHOTS/snipe-it/app:${{ github.ref_name }}} .
+          docker build -t $CONTAINER_REGISTRY_SNAPSHOTS/snipe-it/app:latest -t $CONTAINER_REGISTRY_SNAPSHOTS/snipe-it/app:${{ github.ref_name }} .
           docker push --all-tags $CONTAINER_REGISTRY_SNAPSHOTS/snipe-it/app
 
 
