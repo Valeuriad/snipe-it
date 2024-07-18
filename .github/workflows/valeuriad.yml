@@ -7,6 +7,10 @@ on:
   release:
     types:
       - created
+env:
+  CONTAINER_REGISTRY_HOST: "europe-west1-docker.pkg.dev"
+  CONTAINER_REGISTRY_SNAPSHOTS: "$CONTAINER_REGISTRY_HOST/si-valeuriad-310607/docker-snapshots"
+  CONTAINER_REGISTRY_RELEASES: "$CONTAINER_REGISTRY_HOST/si-valeuriad-310607/docker-releases"
 
 jobs:
   build:
@@ -31,8 +35,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Login to Container Registry
-        run: docker login -u ${{ secrets.CONTAINER_REGISTRY_USERNAME }} -p ${{ secrets.CONTAINER_REGISTRY_PASSWORD }} https://${{ secrets.CONTAINER_REGISTRY_HOST }}
-
+        run: cat ${{ secrets.GCP_SA_KEY }} | base64 -d | docker login -u _json_key --password-stdin https://$CONTAINER_REGISTRY_HOST
+        
       - name: Build and Push Docker Snapshot Image
         run: |
           docker build -t ${{ secrets.CONTAINER_REGISTRY_SNAPSHOTS }}/snipe-it:snapshot-${{ github.ref_name }} .
