@@ -52,8 +52,9 @@ ca-certificates \
 unzip \
 dnsutils \
 expect \
-&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-apt-get remove -y php8.2-cli
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+
+RUN update-alternatives --set php /usr/bin/php8.1 && update-alternatives --set phar /usr/bin/phar8.1 && update-alternatives --set phar.phar /usr/bin/phar.phar8.1
 
 # Install mcrypt php module
 COPY docker/*.exp /tmp/
