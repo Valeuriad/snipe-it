@@ -8,9 +8,9 @@ on:
     types:
       - created
 env:
-  CONTAINER_REGISTRY_HOST: "europe-west1-docker.pkg.dev"
-  CONTAINER_REGISTRY_SNAPSHOTS: "$CONTAINER_REGISTRY_HOST/si-valeuriad-310607/docker-snapshots"
-  CONTAINER_REGISTRY_RELEASES: "$CONTAINER_REGISTRY_HOST/si-valeuriad-310607/docker-releases"
+  CONTAINER_REGISTRY_HOST: europe-west1-docker.pkg.dev
+  CONTAINER_REGISTRY_SNAPSHOTS: europe-west1-docker.pkg.dev/si-valeuriad-310607/docker-snapshots #variables in the env map cannot be defined in terms of other variables in the map.
+  CONTAINER_REGISTRY_RELEASES: europe-west1-docker.pkg.dev/si-valeuriad-310607/docker-releases #variables in the env map cannot be defined in terms of other variables in the map.
 
 jobs:
   build:
