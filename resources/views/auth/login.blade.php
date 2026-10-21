@@ -108,6 +108,9 @@
                                 <button class="btn btn-primary btn-block" type="submit" id="submit">
                                     {{ trans('auth/general.login')  }}
                                 </button>
+                                @if (config('services.google.client_id'))
+                                    <a href="{{ route('login.google') }}" class="btn btn-warning btn-block">{{ trans('auth/general.google_login') }}</a>
+                                @endif
                             @endif
 
                             @if ($snipeSettings->custom_forgot_pass_url)

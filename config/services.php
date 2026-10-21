@@ -49,6 +49,15 @@ return [
 
     'google' => [
         'maps_api_key' => env('GOOGLE_MAPS_API'),
+
+        // "/login/google" SSO (LoginController::google). Independent from the
+        // Admin > Settings > Google login, which stores its credentials in the database.
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT'),
+
+        // Group assigned to users auto-created on their first Google login
+        'default_group_id' => env('GOOGLE_DEFAULT_GROUP_ID', 2),
     ],
 
 ];

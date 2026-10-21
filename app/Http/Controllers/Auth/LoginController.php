@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\Ldap;
 use App\Models\SamlNonce;
 use App\Models\Setting;
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 use Redirect;
 
 /**
@@ -502,6 +505,74 @@ class LoginController extends Controller
         }
 
         return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
+    }
+
+    /**
+     * Redirect to Google for the env-configured SSO (services.google.*).
+     */
+    public function google()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Google SSO callback: log in the matching user, creating it on first login.
+     */
+    public function googleCallback(): RedirectResponse
+    {
+        try {
+            $google = Socialite::driver('google')->stateless()->user();
+        } catch (Exception $e) {
+            Log::debug('Google SSO callback error: '.$e->getMessage());
+
+            return redirect()->route('login')
+                ->withErrors(['username' => [trans('auth/general.google_login_failed')]]);
+        }
+
+        $user = User::where('google_id', $google->getId())->first();
+
+        if (! $user) {
+            $first_name = $google->offsetGet('given_name');
+            $last_name = $google->offsetGet('family_name');
+
+            $user = new User;
+            $user->google_id = $google->getId();
+            $user->first_name = $first_name;
+            $user->last_name = $last_name;
+            $user->username = substr((string) $first_name, 0, 1).str_replace(' ', '', (string) $last_name);
+            $user->email = $google->getEmail();
+            $user->password = bcrypt(Str::random(40));
+            $user->activated = 1;
+            $user->locale = app()->getLocale();
+            $user->avatar = $google->getAvatar();
+            $user->profile_pic = $google->getAvatar();
+            $user->notes = 'Created on first login with Google';
+
+            if (! $user->save()) {
+                Log::debug('Could not create Google user '.$google->getEmail().': '.$user->getErrors());
+
+                return redirect()->route('login')
+                    ->withErrors(['username' => [trans('auth/general.google_login_failed')]]);
+            }
+
+            // Baseline permissions come from a group instead of per-user flags
+            $group = Group::find(config('services.google.default_group_id'));
+            if ($group) {
+                $user->groups()->attach($group->id);
+            }
+
+            Log::notice('Google SSO: created user '.$user->username.' ('.$user->email.', google id '.$user->google_id.')');
+        } elseif (! $user->activated) {
+            return redirect()->route('login')
+                ->withErrors(['username' => [trans('auth/message.account_not_activated')]]);
+        }
+
+        $user->last_login = now();
+        $user->save();
+
+        Auth::login($user, true);
+
+        return redirect()->intended('/');
     }
 
     /**

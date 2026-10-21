@@ -1001,6 +1001,10 @@ Route::group(['middleware' => 'web'], function () {
         [ForgotPasswordController::class, 'sendResetLinkEmail']
     )->name('password.email')->middleware('throttle:forgotten_password');
 
+    // Google SSO with automatic user creation (env based: GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / GOOGLE_REDIRECT)
+    Route::get('login/google', [LoginController::class, 'google'])->name('login.google');
+    Route::get('login/google/callback', [LoginController::class, 'googleCallback'])->name('login.google.callback');
+
     // Socialite Google login
     Route::get('google', 'App\Http\Controllers\GoogleAuthController@redirectToGoogle')->name('google.redirect');
     Route::get('google/callback', 'App\Http\Controllers\GoogleAuthController@handleGoogleCallback')->name('google.callback');
