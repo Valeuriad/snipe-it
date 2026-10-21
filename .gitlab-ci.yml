@@ -1,0 +1,8 @@
+include:
+  - project: 'si/ci-templates'
+    ref: 'main'
+    file: 'templates/template_app.yml'
+
+variables:
+  IMAGE: "materiel/snipe-it"
+  FULL_IMAGE_NAME: $IMAGE:$CI_COMMIT_REF_SLUG
