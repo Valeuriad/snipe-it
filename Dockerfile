@@ -1,6 +1,11 @@
 FROM ubuntu:24.04
 LABEL maintainer="Brady Wetherington <bwetherington@grokability.com>"
 
+# PHP comes from the ondrej/php PPA so we always ship the latest patch release of
+# the 8.3 branch (Ubuntu 24.04 stays on 8.3.6 with backported fixes only).
+# Override with --build-arg PHP_VERSION=8.4
+ARG PHP_VERSION=8.3
+
 # No need to add `apt-get clean` here, reference:
 # - https://github.com/grokability/snipe-it/pull/9201
 # - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get
@@ -10,21 +15,24 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
     echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
     echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections; \
     apt-get update -qqy \
+ && apt-get install -qqy --no-install-recommends software-properties-common ca-certificates gnupg \
+ && add-apt-repository -y ppa:ondrej/php \
+ && apt-get update -qqy \
  && apt-get install -qqy --no-install-recommends \
 apt-utils \
 apache2 \
 apache2-bin \
-libapache2-mod-php8.3 \
-php8.3-curl \
-php8.3-ldap \
-php8.3-mysql \
-php8.3-gd \
-php8.3-xml \
-php8.3-mbstring \
-php8.3-zip \
-php8.3-bcmath \
-php8.3-redis \
-php-memcached \
+libapache2-mod-php${PHP_VERSION} \
+php${PHP_VERSION}-curl \
+php${PHP_VERSION}-ldap \
+php${PHP_VERSION}-mysql \
+php${PHP_VERSION}-gd \
+php${PHP_VERSION}-xml \
+php${PHP_VERSION}-mbstring \
+php${PHP_VERSION}-zip \
+php${PHP_VERSION}-bcmath \
+php${PHP_VERSION}-redis \
+php${PHP_VERSION}-memcached \
 patch \
 curl \
 wget  \
@@ -40,7 +48,7 @@ autoconf \
 libc-dev \
 libldap-common \
 pkg-config \
-php8.3-dev \
+php${PHP_VERSION}-dev \
 ca-certificates \
 unzip \
 dnsutils \
@@ -53,8 +61,8 @@ RUN php go-pear.phar
 RUN phpenmod gd
 RUN phpenmod bcmath
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/8.3/apache2/php.ini
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/8.3/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/${PHP_VERSION}/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/${PHP_VERSION}/cli/php.ini
 
 RUN useradd -m --uid 10000 --gid 50 docker
 
