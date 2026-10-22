@@ -106,7 +106,8 @@ return [
             |
             */
 
-            'username' => env('MAIL_USERNAME'),
+            // Valeuriad: the SMTP relay does not use authentication, so MAIL_USERNAME is ignored
+            'username' => null, // env('MAIL_USERNAME'),
 
             /*
             |--------------------------------------------------------------------------
@@ -119,7 +120,8 @@ return [
             |
             */
 
-            'password' => env('MAIL_PASSWORD'),
+            // Valeuriad: the SMTP relay does not use authentication, so MAIL_PASSWORD is ignored
+            'password' => null, // env('MAIL_PASSWORD'),
 
             /*
             |--------------------------------------------------------------------------
