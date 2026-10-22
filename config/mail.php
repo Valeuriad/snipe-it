@@ -136,6 +136,19 @@ return [
 
             /*
             |--------------------------------------------------------------------------
+            | SMTP EHLO domain
+            |--------------------------------------------------------------------------
+            |
+            | Domain announced to the server in the EHLO command. Symfony Mailer falls
+            | back to "[127.0.0.1]", which Google's SMTP relay rejects with
+            | "421 4.7.0 Try again later". Default to the host of APP_URL instead.
+            |
+            */
+
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+
+            /*
+            |--------------------------------------------------------------------------
             | mostly pointless encryption option
             |--------------------------------------------------------------------------
             |
